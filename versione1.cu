@@ -204,7 +204,7 @@ int main(int argc, char *argv[]){
 	init_vec<<<1, M*N>>>(M*N, matriceX);
 	int i;
 
-	for(i=0;i<5;i++){
+	for(i=0;i<1;i++){
 		cudaEventRecord(pre_prodotto);
 		multi_vec<<<N, M*N>>>(N,N,N,M,somma,matriceA,matriceX);
 		cudaEventRecord(post_prodotto);
@@ -225,9 +225,6 @@ int main(int argc, char *argv[]){
 
 		multi_vec<<<M, M*N*N>>>(M,N,N,N,res,trasposta,matriceA);
 		reduction_row<<<M*N, N>>>(N,res2,res);
-		err = cudaMemcpy(matrice, res0, M*N*sizeof(float), cudaMemcpyDeviceToHost);
-		cuda_check(err, "create mem");
-	  stampa(matrice,M*N);
 		multi_vec<<<N, M*N>>>(M,N,N,M,den,res2,pk);
 		reduction_row<<<N, M*N>>>(N,red_den,den);
 
