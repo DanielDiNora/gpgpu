@@ -1,0 +1,2 @@
+# gpgpu
+Discesa del gradiente
